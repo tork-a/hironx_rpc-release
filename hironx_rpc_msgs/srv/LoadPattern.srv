@@ -1,6 +1,0 @@
-#Request definition
-string  file_path
-int8    tm  # time to complete the loaded pattern
----
-#Response definition
-# None returned.
