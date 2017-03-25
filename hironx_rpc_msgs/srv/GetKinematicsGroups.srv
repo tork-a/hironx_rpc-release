@@ -1,4 +1,0 @@
-#Request definition
----
-#Response definition
-hironx_rpc_msgs/KinematicsGroup[] groups
