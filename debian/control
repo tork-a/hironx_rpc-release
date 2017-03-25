@@ -1,0 +1,13 @@
+Source: ros-indigo-hironx-rpc
+Section: misc
+Priority: extra
+Maintainer: TORK <dev@opensource-robotics.tokyo.jp>
+Build-Depends: debhelper (>= 9.0.0), ros-indigo-catkin
+Homepage: http://wiki.ros.org/hironx_rpc
+Standards-Version: 3.9.2
+
+Package: ros-indigo-hironx-rpc
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-indigo-hironx-rpc-msgs, ros-indigo-hironx-rpc-server
+Description: This package suite provides RPC (Remote Procedure Call) feature for higher level of robot operations for the Hironx-variant robots (i.e.
+ Hironx, NEXTAGE Open).
