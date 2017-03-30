@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 2.8.3)
 project(hironx_rpc_msgs)
 
 find_package(catkin REQUIRED COMPONENTS
-	actionlib
 	actionlib_msgs
 	geometry_msgs
 	message_generation
