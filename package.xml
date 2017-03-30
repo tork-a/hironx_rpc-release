@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>hironx_rpc</name>
-  <version>0.0.2</version>
+  <version>0.0.4</version>
   <description>This package suite provides RPC (Remote Procedure Call)
   feature for higher level of robot operations for the Hironx-variant robots
   (i.e. Hironx, NEXTAGE Open).
