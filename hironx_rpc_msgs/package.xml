@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>hironx_rpc_msgs</name>
-  <version>0.0.4</version>
+  <version>0.0.5</version>
   <description>ROS topic/service/action files are defined in this package for
   Hironx RPC (Remote Procedure Call).
   </description>
