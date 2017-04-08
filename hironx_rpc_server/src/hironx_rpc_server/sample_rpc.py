@@ -46,8 +46,8 @@ import rospy
 
 from hironx_rpc_msgs.srv import (
     CalibrationOperation, GetCartesianCommon, GetJointAngles,
-    GetKinematicsGroups, GetRTCList, GetSensors, GoInitOffPoses, LoadPattern,
-    RobotState, ServoOperation, SetEffort, SetHandJointAngles
+    GetKinematicsGroups, GetRTCList, GetSensors, GoInitOffPoses, HandOperation,
+    LoadPattern, RobotState, ServoOperation, SetEffort, SetHandJointAngles
 )
 
 
@@ -80,6 +80,80 @@ class SampleClientHironxRPC(object):
             _srv_proxy = rospy.ServiceProxy(
                 _srv_name, CalibrationOperation)
             _response = _srv_proxy(method_type_id=1)
+            return _response
+        except rospy.ServiceException, e:
+            raise e
+
+    def sample_HandClose(self, handname='lhand', effort=0.5):
+        '''
+        @note: Because Servo Controller requires an access to the hardware,
+               this command couldn't be tested on the simulator at the time of
+               initial development in Feb 2017. Once confirmed with the
+               hardware, this note can be removed.
+        @see http://docs.ros.org/indigo/api/hironx_ros_bridge/html/classhironx__ros__bridge_1_1hironx__client_1_1HIRONX.html#a6caaf89316991ccb46ebaba620df77ec
+        '''
+        _srv_name = 'srv_HandClose'
+        rospy.wait_for_service(_srv_name)
+        try:
+            _srv_proxy = rospy.ServiceProxy(_srv_name, HandOperation)
+            _response = _srv_proxy(
+                method_type_id=1, handname=handname, effort=effort)
+            return _response
+        except rospy.ServiceException, e:
+            raise e
+
+    def sample_HandGroups(self):
+        '''
+        @rtype [[str, [str]]]
+        @see http://docs.ros.org/indigo/api/hironx_ros_bridge/html/classhironx__ros__bridge_1_1hironx__client_1_1HIRONX.html#aadc0d12dbc139842dc963577dd981f1f
+        '''
+        _srv_name = 'srv_HandGroups'
+        rospy.wait_for_service(_srv_name)
+        groups_list = []
+        try:
+            _srv_proxy = rospy.ServiceProxy(_srv_name, GetKinematicsGroups)
+            _response = _srv_proxy(method_type_id=2)
+            rospy.loginfo('_response.groups: {}'.format(_response.groups))
+            for g in _response.groups:
+                groups_list.append([g.groupname, g.joints])
+            return groups_list
+        except rospy.ServiceException, e:
+            raise e
+
+    def sample_HandOpen(self, handname='lhand', effort=0.5):
+        '''
+        @note: Because Servo Controller requires an access to the hardware,
+               this command couldn't be tested on the simulator at the time of
+               initial development in Feb 2017. Once confirmed with the
+               hardware, this note can be removed.
+        @see http://docs.ros.org/indigo/api/hironx_ros_bridge/html/classhironx__ros__bridge_1_1hironx__client_1_1HIRONX.html#a19c75a0d0365204f032e5387770951fb
+        '''
+        _srv_name = 'srv_HandOpen'
+        rospy.wait_for_service(_srv_name)
+        try:
+            _srv_proxy = rospy.ServiceProxy(_srv_name, HandOperation)
+            _response = _srv_proxy(
+                method_type_id=2, handname=handname, effort=effort)
+            return _response
+        except rospy.ServiceException, e:
+            raise e
+
+    def sample_setHandWidth(
+            self, handname='lhand', effort=0.5, width=10, tm=1):
+        '''
+        @note: Because Servo Controller requires an access to the hardware,
+               this command couldn't be tested on the simulator at the time of
+               initial development in Feb 2017. Once confirmed with the
+               hardware, this note can be removed.
+        @see http://docs.ros.org/indigo/api/hironx_ros_bridge/html/classhironx__ros__bridge_1_1hironx__client_1_1HIRONX.html#a602bdb2754b2b80d4c4448b678e1ef14
+        '''
+        _srv_name = 'srv_setHandWidth'
+        rospy.wait_for_service(_srv_name)
+        try:
+            _srv_proxy = rospy.ServiceProxy(_srv_name, HandOperation)
+            _response = _srv_proxy(
+                method_type_id=2, handname=handname, effort=effort,
+                width=width, tm=tm)
             return _response
         except rospy.ServiceException, e:
             raise e
@@ -201,7 +275,7 @@ class SampleClientHironxRPC(object):
         groups_list = []
         try:
             _srv_proxy = rospy.ServiceProxy(_srv_name, GetKinematicsGroups)
-            _response = _srv_proxy()
+            _response = _srv_proxy(method_type_id=1)
             for g in _response.groups:
                 groups_list.append([g.groupname, g.joints])
             return groups_list
