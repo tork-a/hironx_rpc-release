@@ -1,8 +1,12 @@
 #Request definition
 # Used to identify which method to be used.
-# 1: Groups
-# 2: HandGroups
+# 1: HandClose
+# 2: HandOpen
+# 3: setHandWidth
 int8 method_type_id
+string handname
+int8 effort
+int8 width
+int8 tm
 ---
 #Response definition
-hironx_rpc_msgs/KinematicsGroup[] groups
