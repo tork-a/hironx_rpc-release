@@ -2,6 +2,9 @@
 Changelog for package hironx_rpc_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.0.5 (2017-04-07)
+------------------
+
 0.0.4 (2017-03-30)
 ------------------
 * [fix] More build error. `#4 <https://github.com/tork-a/hironx_rpc/pull/4>`_
