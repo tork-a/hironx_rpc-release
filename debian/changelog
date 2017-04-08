@@ -1,0 +1,27 @@
+ros-indigo-hironx-rpc-server (0.0.5-0saucy) saucy; urgency=high
+
+  * [fix] Install location of script folder. #5 <https://github.com/tork-a/hironx_rpc/pull/5>
+  * [test] Adjust to upstream change #495 <https://github.com/start-jsk/rtmros_hironx/pull/495>
+  * Contributors: Isaac I.Y. Saito
+
+ -- TORK <dev@opensource-robotics.tokyo.jp>  Fri, 07 Apr 2017 07:00:00 -0000
+
+ros-indigo-hironx-rpc-server (0.0.4-0saucy) saucy; urgency=high
+
+
+
+ -- TORK <dev@opensource-robotics.tokyo.jp>  Thu, 30 Mar 2017 07:00:00 -0000
+
+ros-indigo-hironx-rpc-server (0.0.3-0saucy) saucy; urgency=high
+
+
+
+ -- TORK <dev@opensource-robotics.tokyo.jp>  Thu, 30 Mar 2017 07:00:00 -0000
+
+ros-indigo-hironx-rpc-server (0.0.2-0saucy) saucy; urgency=high
+
+
+
+ -- TORK <dev@opensource-robotics.tokyo.jp>  Sat, 25 Mar 2017 07:00:00 -0000
+
+
