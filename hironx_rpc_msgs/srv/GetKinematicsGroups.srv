@@ -1,8 +1,0 @@
-#Request definition
-# Used to identify which method to be used.
-# 1: Groups
-# 2: HandGroups
-int8 method_type_id
----
-#Response definition
-hironx_rpc_msgs/KinematicsGroup[] groups
