@@ -1,6 +1,0 @@
-#Request definition
-string jname
-string option 
----
-#Response definition
-uint8 result

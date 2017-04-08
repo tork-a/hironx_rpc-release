@@ -1,5 +1,0 @@
-#Request definition
-string modelfile_url
----
-#Response definition
-string[] strings
