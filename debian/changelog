@@ -1,0 +1,27 @@
+ros-indigo-hironx-rpc (0.0.5-0trusty) trusty; urgency=high
+
+
+
+ -- TORK <dev@opensource-robotics.tokyo.jp>  Fri, 07 Apr 2017 07:00:00 -0000
+
+ros-indigo-hironx-rpc (0.0.4-0trusty) trusty; urgency=high
+
+
+
+ -- TORK <dev@opensource-robotics.tokyo.jp>  Thu, 30 Mar 2017 07:00:00 -0000
+
+ros-indigo-hironx-rpc (0.0.3-0trusty) trusty; urgency=high
+
+
+
+ -- TORK <dev@opensource-robotics.tokyo.jp>  Thu, 30 Mar 2017 07:00:00 -0000
+
+ros-indigo-hironx-rpc (0.0.2-0trusty) trusty; urgency=high
+
+  * Initial release into ROS buildfarm Indigo.
+  * Apply package.xml format 2. Use Apache license.
+  * Contributors: Isaac I.Y. Saito
+
+ -- TORK <dev@opensource-robotics.tokyo.jp>  Sat, 25 Mar 2017 07:00:00 -0000
+
+
