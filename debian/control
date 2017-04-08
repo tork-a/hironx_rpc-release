@@ -1,0 +1,12 @@
+Source: ros-indigo-hironx-rpc-msgs
+Section: misc
+Priority: extra
+Maintainer: TORK <dev@opensource-robotics.tokyo.jp>
+Build-Depends: debhelper (>= 9.0.0), ros-indigo-actionlib-msgs, ros-indigo-catkin, ros-indigo-geometry-msgs, ros-indigo-message-generation, ros-indigo-std-msgs, ros-indigo-tork-rpc-util
+Homepage: http://wiki.ros.org/hironx_rpc_msgs
+Standards-Version: 3.9.2
+
+Package: ros-indigo-hironx-rpc-msgs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-indigo-actionlib-msgs, ros-indigo-geometry-msgs, ros-indigo-message-runtime, ros-indigo-std-msgs, ros-indigo-tork-rpc-util
+Description: ROS topic/service/action files are defined in this package for Hironx RPC (Remote Procedure Call).
