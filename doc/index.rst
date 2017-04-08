@@ -16,11 +16,15 @@ Required environment
 Having the following software installed is assumed.
 
 * Ubuntu 14.04
-* ROS Indigo
-* `hrpsys <http://wiki.ros.org/hrpsys>`_ 315.10.1 or higher
-* `rtmros_common <http://wiki.ros.org/rtmros_common>`_ 1.3.2 or higher
-* (Hironx users) `rtmros_hironx <http://wiki.ros.org/rtmros_hironx>`_ 1.1.21 or higher
-* (NEXTAGE users) `rtmros_nextage <http://wiki.ros.org/rtmros_nextage>`_ 0.7.15 or higher
+  * ROS Indigo
+  * `hrpsys <http://wiki.ros.org/hrpsys>`_ 315.10.1 or higher
+  * `rtmros_common <http://wiki.ros.org/rtmros_common>`_ 1.3.2 or higher
+  * (Hironx users) `rtmros_hironx <http://wiki.ros.org/rtmros_hironx>`_ 1.1.21 or higher
+  * (NEXTAGE users) `rtmros_nextage <http://wiki.ros.org/rtmros_nextage>`_ 0.7.15 or higher
+* QNX 6.5.0
+  * hrpsys 315.1.8 or higher
+
+The rest of this document discusses the Ubuntu environment only unless specified.
 
 Install
 ========
@@ -28,15 +32,13 @@ Install
 Install binary (RECOMMENDED)
 --------------------------------
 
-(Not completely ready as of March 20, 2017)
-
 The following command should install all necessary packages.
 
 ::
 
   sudo apt-get install ros-indigo-hironx-rpc
 
-Install from source
+Install from source (Optional)
 --------------------------------
 
 Although in the following example your `Catkin workspace <http://wiki.ros.org/catkin/Tutorials/create_a_workspace>`_ named is assumed to be named as `cws_rpc`, you can change it as you wish, or use your own existing one as needed::
@@ -113,7 +115,7 @@ Then call the methods through `sample_rpc` object. For example::
 Tech support 
 =============
 
-Search existing issues, submit a ticket at `the repository <https://github.com/start-jsk/rtmros_hironx/issues>`_.
+Search existing issues, submit a ticket at `the repository <https://github.com/tork-a/hironx_rpc/issues>`_.
 
 Software Design
 =================
@@ -130,7 +132,7 @@ Some existing ROS topics and services are utilized from `hrpsys_ros_bridge <http
 Acknowledgement
 ================
 
-The work initially taken to create this package was sponsored by `Keio University Yamaguchi Lab <http://www.yamaguti.comp.ae.keio.ac.jp/en/index.en.html>`_.
+The work initially taken to create this package was sponsored by `Yamaguchi Lab at Keio University <http://www.yamaguti.comp.ae.keio.ac.jp/en/index.en.html>`_.
 
 Indices and tables
 ==================
