@@ -45,6 +45,7 @@ from hironx_rpc_msgs.srv import (
     GetRTCList, GetRTCListResponse,
     GetSensors, GetSensorsResponse,
     GoInitOffPoses, GoInitOffPosesResponse,
+    HandOperation, HandOperationResponse,
     LoadPattern, LoadPatternResponse,
     RobotState, RobotStateResponse,
     ServoOperation, ServoOperationResponse,
@@ -73,6 +74,10 @@ class ActionServiceNameDict(object):
     getSensors = 'srv_getSensors'
     goInitial = 'srv_goInitial'
     goOffPose = 'srv_goOffPose'
+    HandClose = 'srv_HandClose'
+    HandGroups = 'srv_HandGroups'
+    HandOpen = 'srv_HandOpen'
+    setHandWidth = 'srv_setHandWidth'
     isCalibDone = 'srv_isCalibDone'
     isServoOn = 'srv_isServoOn'
     loadPattern = 'srv_loadPattern'
@@ -80,6 +85,7 @@ class ActionServiceNameDict(object):
     servoOff = 'srv_servoOff'
     servoOn = 'srv_servoOn'
     setHandJointAngles = 'srv_setHandJointAngles'
+    setHandWidth = 'srv_setHandWidth'
     setEffort = 'srv_setEffort'
 
 
@@ -115,6 +121,10 @@ class HironxRpcServer(RpcServersHandler):
             ActionServiceNameDict.getSensors: ActionServiceInfo(ActionServiceNameDict.getSensors, GetSensors, self._cb_getSensors),
             ActionServiceNameDict.goInitial: ActionServiceInfo(ActionServiceNameDict.goInitial, GoInitOffPoses, self._cb_goInitOffPoses),
             ActionServiceNameDict.goOffPose: ActionServiceInfo(ActionServiceNameDict.goOffPose, GoInitOffPoses, self._cb_goInitOffPoses),
+            ActionServiceNameDict.HandClose: ActionServiceInfo(ActionServiceNameDict.HandClose, HandOperation, self._cb_HandOperation),
+            ActionServiceNameDict.HandGroups: ActionServiceInfo(ActionServiceNameDict.HandGroups, GetKinematicsGroups, self._cb_get_kinematics_groups),
+            ActionServiceNameDict.HandOpen: ActionServiceInfo(ActionServiceNameDict.HandOpen, HandOperation, self._cb_HandOperation),
+            ActionServiceNameDict.setHandWidth: ActionServiceInfo(ActionServiceNameDict.setHandWidth, HandOperation, self._cb_HandOperation),
             ActionServiceNameDict.isCalibDone: ActionServiceInfo(ActionServiceNameDict.isCalibDone, CalibrationOperation, self._cb_calibration_operation),
             ActionServiceNameDict.isServoOn: ActionServiceInfo(ActionServiceNameDict.isServoOn, ServoOperation, self._cb_servoOperation),
             ActionServiceNameDict.loadPattern: ActionServiceInfo(ActionServiceNameDict.loadPattern, LoadPattern, self._cb_loadPattern),
@@ -246,10 +256,18 @@ class HironxRpcServer(RpcServersHandler):
         @type service_req: hironx_rpc_msgs.srv.GetKinematicsGroups
         '''
         rospy.loginfo('Service requested {} '.format(service_req))
-        ret = self._robotif.Groups
+        ret = None
         res = GetKinematicsGroupsResponse()
-        for g in ret:
-            res.groups.append(KinematicsGroup(groupname=g[0], joints=g[1]))
+        if 1 == service_req.method_type_id:
+            ret = self._robotif.Groups
+            for g in ret:
+                res.groups.append(KinematicsGroup(groupname=g[0], joints=g[1]))
+        if 2 == service_req.method_type_id:
+            ret = self._robotif.HandGroups
+            for g, list_int_joints in ret.items():
+                list_str_joints = [str(e) for e in list_int_joints]
+                res.groups.append(
+                    KinematicsGroup(groupname=g, joints=list_str_joints))
         return res
 
     def _cb_getRTCList(self, service_req):
@@ -286,6 +304,25 @@ class HironxRpcServer(RpcServersHandler):
             return GoInitOffPosesResponse()
         else:
             return False  # TODO: Throw exception or service
+
+    def _cb_HandOperation(self, service_req):
+        '''
+        @type service_req: hironx_rpc_msgs.srv.HandOperation
+        '''
+        rospy.loginfo('Service requested {} '.format(service_req))
+        method_type_id = service_req.method_type_id
+        handname = service_req.handname
+        effort = service_req.effort
+
+        if 1 == method_type_id:
+            self._robotif.HandClose(hand=handname, effort=effort)
+        elif 2 == method_type_id:
+            self._robotif.HandOpen(hand=handname, effort=effort)
+        elif 3 == method_type_id:
+            self._robotif.HandOpen(
+                hand=handname, width=service_req.width, effort=effort,
+                tm=service_req.tm)
+        return HandOperationResponse()
 
     def _cb_loadPattern(self, service_req):
         '''
